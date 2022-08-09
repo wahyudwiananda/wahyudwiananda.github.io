@@ -6,6 +6,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
 
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!-- My CSS -->
     <link rel="stylesheet" href="style.css" />
 
@@ -14,7 +17,7 @@
   </head>
   <body id="home">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow navbar fixed-top" style="background-color: #03063a">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow navbar fixed-top" style="background-color: #03063a" data-aos="fade-down">
       <div class="container">
         <a class="navbar-brand" href="#">My Portfolio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +48,9 @@
 
     <!-- Jumbotron -->
     <section class="jumbotron text-center">
-      <img src="img/wahyu.jpg" alt="Wahyu Dwi Ananda" width="200" class="rounded-circle img-thumbnail" />
-      <h1 class="display-4">Wahyu Dwi Ananda</h1>
-      <p class="lead">Computer System | Gunadarma University</p>
+      <img src="img/wahyu.jpg" alt="Wahyu Dwi Ananda" width="200" class="rounded-circle img-thumbnail" data-aos="fade-in" />
+      <h1 class="display-4" data-aos="fade-right">Wahyu Dwi Ananda</h1>
+      <p class="lead" data-aos="fade-left">Computer System | Gunadarma University</p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#fff"
@@ -60,7 +63,7 @@
 
     <!-- About -->
     <section id="about">
-      <div class="container">
+      <div class="container" data-aos="fade-up">
         <div class="row text-center mb-3">
           <div class="col">
             <h2>About Me</h2>
@@ -88,7 +91,7 @@
 
     <!-- CV -->
     <section id="CV">
-      <div class="container">
+      <div class="container" data-aos="zoom-in-up">
         <div class="row text-center mb-3">
           <div class="col">
             <h2>My Curriculum Vitae</h2>
@@ -114,13 +117,13 @@
     <section id="projects">
       <div class="container">
         <div class="row text-center mb-3">
-          <div class="col">
+          <div class="col" data-aos="flip-left">
             <h2>My Projects</h2>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/1.jpg" class="card-img-top" alt="projects1" />
               <div class="card-body">
                 <p class="card-text">Realtime Face Detection / Face Tracker - Python, OpenCV.</p>
@@ -128,7 +131,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/2.png" class="card-img-top" alt="projects2" />
               <div class="card-body">
                 <p class="card-text">Realtime Object Detection - Python, OpenCV.</p>
@@ -136,7 +139,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/3.jpg" class="card-img-top" alt="projects3" />
               <div class="card-body">
                 <p class="card-text">Realtime Mask Detection - Python, OpenCV, Tensorflow/Keras.</p>
@@ -144,7 +147,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/4.png" class="card-img-top" alt="projects4" />
               <div class="card-body">
                 <p class="card-text">Realtime 'My Style' Camera Filter - C++, OpenCV.</p>
@@ -152,7 +155,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/5.png" class="card-img-top" alt="projects5" />
               <div class="card-body">
                 <p class="card-text">Object Oriented Programming (Encapsulation, Inheritance & Polymorphism) - Java.</p>
@@ -160,7 +163,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/6.png" class="card-img-top" alt="projects6" />
               <div class="card-body">
                 <p class="card-text">My Portfolio Website - HTML, CSS, Bootstrap.</p>
@@ -168,7 +171,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/7.png" class="card-img-top" alt="projects7" />
               <div class="card-body">
                 <p class="card-text">Digital System Circuit Simulation - Proteus.</p>
@@ -176,7 +179,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" data-aos="flip-left">
               <img src="img/projects/8.png" class="card-img-top" alt="projects8" />
               <div class="card-body">
                 <p class="card-text">Electrical Project (Auto Fan with Temperature Sensor).</p>
@@ -197,7 +200,7 @@
 
     <!-- Contact -->
     <section id="contact">
-      <div class="container">
+      <div class="container" data-aos="fade-up">
         <div class="row text-center mb-3">
           <div class="col">
             <h2>Contact Me</h2>
@@ -222,12 +225,12 @@
             </form>
             <div class="row pt-5">
               <div class="col">
-                <p><i class="bi bi-envelope"></i> <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=wahyuananda39@gmail.com">wahyuananda39@gmail.com</a></p>
-                <p><i class="bi bi-whatsapp"></i> <a href="https://api.whatsapp.com/send?phone=6285156495806">+62 851-5649-5806</a></p>
-                <p><i class="bi bi-instagram"></i> <a href="https://www.instagram.com/wahyuananda_05/">@wahyuananda_05</a></p>
-                <p><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/wahyu.d.ananda/">Wahyu Ananda</a></p>
-                <p><i class="bi bi-github"></i> <a href="https://github.com/wahyudwiananda">Wahyu Dwi Ananda</a></p>
-                <p><i class="bi bi-geo-alt"></i> <a href="https://goo.gl/maps/btKmvbJHnopSfWGC7">Tangerang, Indonesia</a></p>
+                <p><i class="bi bi-envelope"></i> <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=wahyuananda39@gmail.com" target="_blank">wahyuananda39@gmail.com</a></p>
+                <p><i class="bi bi-whatsapp"></i> <a href="https://api.whatsapp.com/send?phone=6285156495806" target="_blank">+62 851-5649-5806</a></p>
+                <p><i class="bi bi-instagram"></i> <a href="https://www.instagram.com/wahyuananda_05/" target="_blank">@wahyuananda_05</a></p>
+                <p><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/wahyu.d.ananda/" target="_blank">Wahyu Ananda</a></p>
+                <p><i class="bi bi-github"></i> <a href="https://github.com/wahyudwiananda" target="_blank">Wahyu Dwi Ananda</a></p>
+                <p><i class="bi bi-geo-alt"></i> <a href="https://goo.gl/maps/btKmvbJHnopSfWGC7" target="_blank">Tangerang, Indonesia</a></p>
               </div>
             </div>
           </div>
@@ -245,10 +248,14 @@
 
     <!-- Footer -->
     <footer class="text-white text-center p-5" style="background-color: #03063a">
-      <p>Copyright © 2022 by <a href="https://github.com/wahyudwiananda" class="text-white">Wahyu Dwi Ananda</a></p>
+      <p>© 2022 <a href="https://github.com/wahyudwiananda" target="_blank" class="text-white">Wahyu Dwi Ananda</a></p>
     </footer>
     <!-- Akhir Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
