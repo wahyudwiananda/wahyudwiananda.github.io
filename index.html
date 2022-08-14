@@ -208,20 +208,20 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-6">
-            <form>
+            <form action="https://formspree.io/f/xoqbqnvk" method="POST">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="name" />
+                <input type="text" class="form-control" id="name" aria-describedby="name" name="Name" />
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="email" />
+                <input type="email" class="form-control" id="email" aria-describedby="email" name="Email" />
               </div>
               <div class="mb-3">
                 <label for="pesan" class="form-label">Message</label>
-                <textarea class="form-control" id="pesan" rows="3"></textarea>
+                <textarea class="form-control" id="pesan" rows="3" name="Message"></textarea>
               </div>
-              <input class="btn btn-primary" type="submit" value="Submit" onclick="alert ('The e-mail form is Under Development!\nPlease send me a message to one of my contact list below. Thanks!')" />
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div class="row pt-5">
               <div class="col">
