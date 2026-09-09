@@ -1,238 +1,879 @@
 <!doctype html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link rel="icon" type="image/svg+xml" href="assets/img/web logo.svg" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wahyu Dwi Ananda | IoT & Informatics Expert</title>
+    <link rel="icon" type="image/png" href="assets/img/logoweb.png" />
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <!-- Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                dark: '#0a0204',
+                card: '#16050a',
+                crimson: '#dc2626',
+                ruby: '#991b1b',
+                blood: '#7f1d1d',
+                gold: '#d4af37',
+                goldLight: '#fef08a',
+                goldDark: '#854d0e',
+                goldMetallic: '#e5c158',
+                platinum: '#f8fafc',
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+              serif: ['"Cinzel"', 'serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --bg-dark: #0a0204;
+        --card-glass: rgba(22, 5, 10, 0.78);
+        --gold-primary: #d4af37;
+        --gold-light: #fbe38e;
+        --gold-glow: rgba(212, 175, 55, 0.25);
+        --red-primary: #dc2626;
+        --red-glow: rgba(220, 38, 38, 0.35);
+        --text-white: #ffffff;
+        --text-muted: #cbd5e1;
+        --border-gold: rgba(212, 175, 55, 0.3);
+        --border-red: rgba(220, 38, 38, 0.3);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0204;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #d4af37, #991b1b);
+        border-radius: 4px;
+      }
+
+      /* Gold Gradient Text */
+      .text-gradient-gold {
+        background: linear-gradient(135deg, #ffffff 0%, #fef08a 30%, #d4af37 70%, #aa771c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .text-gradient-ruby {
+        background: linear-gradient(135deg, #ffffff 0%, #fca5a5 30%, #ef4444 70%, #991b1b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Metallic Gold Border Glow */
+      .gold-border-glow {
+        border: 1px solid var(--border-gold);
+        box-shadow:
+          0 0 15px rgba(212, 175, 55, 0.08),
+          inset 0 0 15px rgba(212, 175, 55, 0.03);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .gold-border-glow:hover {
+        border-color: rgba(212, 175, 55, 0.7);
+        box-shadow:
+          0 0 25px rgba(212, 175, 55, 0.25),
+          inset 0 0 20px rgba(220, 38, 38, 0.15);
+        transform: translateY(-3px);
+      }
+
+      /* Crimson Red Card Hover */
+      .red-card-glow {
+        border: 1px solid var(--border-red);
+        box-shadow: 0 0 15px rgba(220, 38, 38, 0.08);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .red-card-glow:hover {
+        border-color: rgba(220, 38, 38, 0.8);
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+        transform: translateY(-3px);
+      }
+
+      /* Interactive Grid Glass */
+      .bento-glass {
+        background: linear-gradient(145deg, rgba(28, 7, 14, 0.82), rgba(12, 2, 5, 0.92));
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 1.25rem;
+      }
+
+      /* Canvas Background */
+      #bgCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Button Golden Shine Effect */
+      .btn-gold-shine {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #8b6508 100%);
+        color: #000000;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .btn-gold-shine::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transform: rotate(30deg) translateY(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .btn-gold-shine:hover::after {
+        transform: rotate(30deg) translateY(100%);
+      }
+
+      .btn-gold-shine:hover {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        transform: scale(1.02);
+      }
+
+      /* Modal Overlay */
+      .modal-blur-bg {
+        background: rgba(8, 1, 3, 0.85);
+        backdrop-filter: blur(12px);
+      }
+
+      /* Glowing Pulse Node */
+      @keyframes pulse-gold {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+          box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+          box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+        }
+      }
+
+      .pulse-gold-node {
+        animation: pulse-gold 2.5s infinite ease-in-out;
+      }
+
+      /* Typing Cursor */
+      .typed-cursor {
+        color: #d4af37;
+        font-weight: bold;
+        animation: blink 0.7s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
+  <body class="bg-[#0a0204] text-white font-sans antialiased selection:bg-brand-gold selection:text-black min-h-screen relative overflow-x-hidden">
+    <!-- Interactive Red & Golden Node Particle Canvas -->
+    <canvas id="bgCanvas"></canvas>
 
-  <body>
-    <div class="cyber-grid-bg"></div>
+    <!-- Ambient Glowing Radial Orbs -->
+    <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-brand-crimson/15 rounded-full blur-[140px] pointer-events-none -z-1"></div>
+    <div class="fixed bottom-10 right-10 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[160px] pointer-events-none -z-1"></div>
 
-    <main class="container">
-      <nav class="cyber-nav" data-aos="fade-down">
-        <div class="logo"><span class="status-node"></span> WAHYU_ANANDA.SYS</div>
-        <div class="nav-status">
-          <span class="badge-tech">CORE: IoT & INFORMATICS</span>
-        </div>
-      </nav>
-
-      <section class="bento-grid container-profile">
-        <div class="bento-card span-2-col span-2-row hero-card" data-aos="fade-up">
-          <div class="tech-tag"><i class="bx bx-chip"></i> SYSTEM ARCHITECT</div>
-          <h1>Wahyu Dwi Ananda</h1>
-          <div class="typed-box">
-            <span class="typed" data-typed-items="Informatics Teacher., Embedded System Engineer., IoT Specialist."></span>
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0a0204]/80 border-b border-brand-gold/20 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold via-brand-crimson to-black p-[1px] shadow-lg shadow-brand-gold/20">
+            <div class="w-full h-full bg-brand-dark rounded-xl flex items-center justify-center group-hover:bg-brand-crimson/20 transition-colors">
+              <img src="assets/img/logoweb.png" alt="Wahyu Dwi Ananda Logo" class="w-8 h-8 object-contain" />
+            </div>
           </div>
-          <p class="hero-desc">
-            Menghubungkan dunia edukasi teknologi dengan rekayasa perangkat keras cerdas sebagai Praktisi Informatika dan IoT Specialist. Memiliki keunggulan kompetitif dalam metodologi riset sistem komputer, troubleshooting jaringan, serta
-            kepemimpinan organisasi yang teruji. Berkomitmen membangun arsitektur teknologi cerdas yang adaptif terhadap modernisasi data.
-          </p>
+          <div>
+            <span class="font-serif tracking-widest text-lg font-bold text-white group-hover:text-brand-gold transition-colors flex items-center gap-1.5"> Wahyu Dwi Ananda </span>
+            <span class="text-[10px] font-mono tracking-wider text-brand-gold/80 block uppercase">Portfolio</span>
+          </div>
+        </a>
+
+        <!-- Status Badge & Quick Nav -->
+        <div class="hidden md:flex items-center gap-6">
+          <nav class="flex items-center gap-6 text-sm font-medium text-slate-300">
+            <a href="#hero" class="hover:text-brand-gold transition-colors">Overview</a>
+            <a href="#timeline" class="hover:text-brand-gold transition-colors">Timeline</a>
+            <a href="#iot-projects" class="hover:text-brand-gold transition-colors">IoT Systems</a>
+            <a href="#web-apps" class="hover:text-brand-gold transition-colors">Web Utility</a>
+            <a href="#certifications" class="hover:text-brand-gold transition-colors">Certifications</a>
+          </nav>
         </div>
 
-        <div class="bento-card span-2-col terminal-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="terminal-header"><i class="bx bx-terminal"></i> active_profile.log</div>
-          <div class="terminal-body">
-            <p><span class="t-accent">> ED_LEVEL:</span> Master's Student of Informatics Engineering</p>
-            <p><span class="t-accent">> FOCUS:</span> Internet of Things</p>
-            <p><span class="t-accent">> COMP_SYS:</span> Informatics Teacher</p>
+        <!-- Contact CTA Header Button -->
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-gold-shine text-xs font-bold uppercase tracking-wider">
+          <i class="bx bx-paper-plane text-sm"></i>
+          <span>Send Message</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 space-y-12">
+      <!-- ================= HERO BENTO GRID SECTION ================= -->
+      <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Hero Profile Card (Span 8) -->
+        <div class="lg:col-span-8 bento-glass gold-border-glow p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col justify-between group">
+          <!-- Decorative Gold Accent Ribbon -->
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-brand-gold/15 via-brand-crimson/10 to-transparent rounded-bl-full pointer-events-none"></div>
+          <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-brand-crimson/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div>
+            <!-- Tech Tag -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-mono mb-6">
+              <i class="bx bx-chip text-sm"></i>
+              <span class="tracking-widest uppercase font-semibold">SYSTEM ARCHITECT & EMBEDDED ENGINEER</span>
+            </div>
+
+            <!-- Main Name Heading -->
+            <h1 class="text-3xl sm:text-5xl font-serif font-black tracking-tight text-white mb-3">Wahyu Dwi Ananda</h1>
+
+            <!-- Typed Text Display -->
+            <div class="h-8 font-mono text-lg sm:text-xl text-brand-gold flex items-center mb-6">
+              <span class="mr-2 text-brand-crimson">&gt;</span>
+              <span id="typed-output"></span>
+              <span class="typed-cursor">|</span>
+            </div>
+
+            <!-- Profile Bio Description -->
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl font-sans mb-8">
+              Driven by a passion for technology and innovation, I bridge <span class="text-brand-gold font-semibold">technology education, intelligent hardware, and IoT engineering</span> as an Informatics Practitioner and IoT Specialist.
+              My expertise spans computer systems, network infrastructure, research, and technology-driven problem solving, complemented by strong leadership and organizational experience. I am committed to creating
+              <span class="text-brand-gold font-semibold">intelligent, adaptive, and impactful technology solutions</span> that contribute to the advancement of education and the digital future.
+            </p>
+          </div>
+
+          <!-- Interactive Stats Counters Ribbon -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-brand-gold/20">
+            <div class="bg-black/40 p-3.5 rounded-xl border border-brand-gold/15 text-center sm:text-left">
+              <div class="text-2xl font-serif font-bold text-gradient-gold">10+</div>
+              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">IoT Projects</div>
+            </div>
+            <div class="bg-black/40 p-3.5 rounded-xl border border-brand-gold/15 text-center sm:text-left">
+              <div class="text-2xl font-serif font-bold text-gradient-gold">30+</div>
+              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Certifications</div>
+            </div>
+            <div class="bg-black/40 p-3.5 rounded-xl border border-brand-gold/15 text-center sm:text-left">
+              <div class="text-2xl font-serif font-bold text-gradient-ruby">S2</div>
+              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Informatics Candidate</div>
+            </div>
+            <div class="bg-black/40 p-3.5 rounded-xl border border-brand-gold/15 text-center sm:text-left">
+              <div class="text-2xl font-serif font-bold text-gradient-gold">100%</div>
+              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Commitment</div>
+            </div>
+          </div>
+
+          <!-- CTA Action Buttons -->
+          <div class="mt-8 flex flex-wrap gap-4 items-center">
+            <a href="#iot-projects" class="btn-gold-shine px-6 py-3 rounded-xl flex items-center gap-2 text-sm uppercase tracking-wider font-bold">
+              <i class="bx bx-layer"></i>
+              <span>Go Explore!</span>
+            </a>
+            <a
+              href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=wahyuananda39@gmail.com"
+              target="_blank"
+              class="px-6 py-3 rounded-xl bg-brand-crimson/20 border border-brand-crimson/50 hover:bg-brand-crimson text-white transition-all text-sm font-semibold flex items-center gap-2"
+            >
+              <i class="bx bxl-gmail text-lg"></i>
+              <span>Direct Email</span>
+            </a>
           </div>
         </div>
 
-        <div class="bento-card span-2-col connect-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="connect-grid">
-            <div class="connect-item"><i class="bi bi-geo-alt"></i> <span>Tangerang, ID</span></div>
-            <div class="connect-item"><i class="bi bi-envelope"></i> <span>wahyuananda39@gmail.com</span></div>
+        <!-- Hero Avatar & Graphic Showcase Card (Span 4) -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+          <!-- Avatar Graphic Frame Card -->
+          <div class="bento-glass gold-border-glow p-6 flex flex-col items-center justify-center text-center relative group overflow-hidden">
+            <!-- Rotating Metallic Gold Ring Orbit -->
+            <div class="relative w-48 h-48 sm:w-56 sm:h-56 my-4 flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-brand-gold/40 animate-[spin_20s_linear_infinite]"></div>
+              <div class="absolute inset-2 rounded-full border border-brand-crimson/50 animate-[spin_12s_linear_infinite_reverse]"></div>
+
+              <!-- Avatar Container -->
+              <div class="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden p-1 bg-gradient-to-tr from-brand-gold via-brand-crimson to-white shadow-2xl relative">
+                <!-- High Tech Placeholder Graphic / User Image Fallback -->
+                <div class="w-full h-full rounded-full bg-brand-dark flex items-center justify-center overflow-hidden relative group">
+                  <img
+                    src="assets/img/hero.jpeg"
+                    alt="Wahyu Dwi Ananda Avatar"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onerror="
+                      this.onerror = null;
+                      this.src = 'https://placehold.co/400x400/16050a/d4af37?text=WAHYU+ANANDA';
+                    "
+                  />
+                  <!-- Tech Overlay Grid -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
+                </div>
+              </div>
+
+              <!-- Floating Micro Badges -->
+              <div class="absolute bottom-2 right-2 bg-brand-card/90 border border-brand-gold px-3 py-1 rounded-full text-[10px] font-mono text-brand-gold flex items-center gap-1 shadow-lg backdrop-blur-sm">
+                <i class="bx bx-check-shield text-emerald-400"></i> VERIFIED
+              </div>
+            </div>
+
+            <h3 class="font-serif font-bold text-lg text-white mt-2">Wahyu Dwi Ananda, S.Kom.</h3>
+            <p class="text-xs font-mono text-brand-gold">M.Kom. Candidate</p>
           </div>
-          <div class="cyber-socials">
-            <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=wahyuananda39@gmail.com" target="_blank"><i class="bx bxl-gmail"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=6285156495806" target="_blank"><i class="bx bxl-whatsapp"></i></a>
-            <a href="https://www.instagram.com/wahyuananda_05/" target="_blank"><i class="bx bxl-instagram"></i></a>
-            <a href="https://www.facebook.com/wahyu.d.ananda/" target="_blank"><i class="bx bxl-facebook"></i></a>
-            <a href="https://www.linkedin.com/in/wahyu-dwi-ananda-54876b17b/" target="_blank"><i class="bx bxl-linkedin"></i></a>
+
+          <!-- Connect & Social Networks Card -->
+          <div class="bento-glass red-card-glow p-6 flex flex-col justify-between flex-1">
+            <div class="space-y-3 mb-6">
+              <div class="text-xs font-mono text-brand-gold uppercase tracking-wider flex items-center gap-2">
+                <i class="bx bx-radar text-brand-crimson text-base"></i>
+                <span>CONTACT DETAILS</span>
+              </div>
+              <div class="text-sm font-mono flex items-center gap-2.5 text-slate-300">
+                <i class="bi bi-geo-alt text-brand-gold"></i>
+                <span>Tangerang, Banten, Indonesia</span>
+              </div>
+              <div class="text-sm font-mono flex items-center gap-2.5 text-slate-300 truncate">
+                <i class="bi bi-envelope text-brand-gold"></i>
+                <span class="truncate">wahyuananda39@gmail.com</span>
+              </div>
+            </div>
+
+            <!-- Social Icons Grid -->
+            <div class="grid grid-cols-5 gap-2">
+              <a
+                href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=wahyuananda39@gmail.com"
+                target="_blank"
+                title="Gmail"
+                class="h-11 rounded-xl bg-black/50 border border-brand-gold/30 hover:border-brand-gold hover:bg-brand-gold/20 flex items-center justify-center text-lg text-white hover:text-brand-gold transition-all"
+              >
+                <i class="bx bxl-gmail"></i>
+              </a>
+              <a
+                href="https://api.whatsapp.com/send?phone=6285156495806"
+                target="_blank"
+                title="WhatsApp"
+                class="h-11 rounded-xl bg-black/50 border border-brand-gold/30 hover:border-brand-gold hover:bg-emerald-500/20 flex items-center justify-center text-lg text-white hover:text-emerald-400 transition-all"
+              >
+                <i class="bx bxl-whatsapp"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/wahyuananda_05/"
+                target="_blank"
+                title="Instagram"
+                class="h-11 rounded-xl bg-black/50 border border-brand-gold/30 hover:border-brand-gold hover:bg-pink-500/20 flex items-center justify-center text-lg text-white hover:text-pink-400 transition-all"
+              >
+                <i class="bx bxl-instagram"></i>
+              </a>
+              <a
+                href="https://www.facebook.com/wahyu.d.ananda/"
+                target="_blank"
+                title="Facebook"
+                class="h-11 rounded-xl bg-black/50 border border-brand-gold/30 hover:border-brand-gold hover:bg-blue-500/20 flex items-center justify-center text-lg text-white hover:text-blue-400 transition-all"
+              >
+                <i class="bx bxl-facebook"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/wahyu-dwi-ananda-54876b17b/"
+                target="_blank"
+                title="LinkedIn"
+                class="h-11 rounded-xl bg-black/50 border border-brand-gold/30 hover:border-brand-gold hover:bg-sky-500/20 flex items-center justify-center text-lg text-white hover:text-sky-400 transition-all"
+              >
+                <i class="bx bxl-linkedin"></i>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="section-label" data-aos="fade-in"><span>[01] ACADEMIC & PROFESSIONAL TIMELINE</span></div>
-
-      <section class="bento-grid">
-        <div class="bento-card span-2-col interactive-card" data-modal-target="modal-experience" data-aos="zoom-in">
-          <div class="inter-content">
-            <i class="bx bx-briefcase-alt-2 main-icon"></i>
-            <h3>Professional Experience</h3>
-            <p>Citra Bangsa School & Laboratorium Elektronika</p>
-            <span class="click-hint">CLICK TO EXPAND LOGS _</span>
+      <!-- TERMINAL LOG PROFILE & SECTION SEPARATOR -->
+      <div class="bento-glass gold-border-glow p-6">
+        <div class="flex items-center justify-between border-b border-brand-gold/20 pb-3 mb-4">
+          <div class="flex items-center gap-2 font-mono text-xs text-brand-gold">
+            <i class="bx bx-terminal text-base text-brand-crimson"></i>
+            <span>About Me</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
           </div>
         </div>
+        <div class="font-mono text-xs sm:text-sm space-y-2 text-slate-300">
+          <p><span class="text-brand-gold font-bold">&gt; Education:</span> Master's Student of Informatics Engineering (Universitas Pamulang)</p>
+          <p><span class="text-brand-gold font-bold">&gt; Areas of Interest:</span> Internet of Things, Embedded Hardware & Artificial Intelligence</p>
+          <p><span class="text-brand-gold font-bold">&gt; Current Role:</span> Informatics & AI Educator — Citra Bangsa School</p>
+        </div>
+      </div>
 
-        <div class="bento-card span-2-col interactive-card" data-modal-target="modal-education" data-aos="zoom-in" data-aos-delay="100">
-          <div class="inter-content">
-            <i class="bx bx-cabinet main-icon"></i>
-            <h3>Education History</h3>
-            <p>S2 Universitas Pamulang & S1 Universitas Gunadarma</p>
-            <span class="click-hint">CLICK TO EXPAND LOGS _</span>
-          </div>
+      <!-- ================= SECTION 01: ACADEMIC & PROFESSIONAL TIMELINE ================= -->
+      <section id="timeline" class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-md border border-brand-gold/30">[01]</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">ACADEMIC & PROFESSIONAL TIMELINE</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-brand-gold/40 to-transparent"></div>
         </div>
 
-        <div class="bento-card span-full interactive-card" data-modal-target="modal-organization" data-aos="zoom-in" data-aos-delay="200">
-          <div class="inter-content flex-row-hint">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Professional Experience Card Trigger -->
+          <div onclick="openModal('modal-experience')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:bg-brand-crimson/10 transition-all flex flex-col justify-between min-h-[180px]">
             <div>
-              <h3>Organizational Leadership</h3>
-              <p>Himpunan Mahasiswa Sistem Komputer (Wakil Ketua & Divisi Akademik)</p>
+              <i class="bx bx-briefcase-alt-2 text-3xl text-brand-gold group-hover:scale-110 transition-transform mb-3 block"></i>
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Professional Experience</h3>
+              <p class="text-xs text-slate-400 mt-1 font-mono">Citra Bangsa School & Lab Elektronika Gunadarma</p>
             </div>
-            <span class="click-hint">CLICK TO EXPAND LOGS _</span>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-label" data-aos="fade-in"><span>[02] PRIMARY KERNEL: INTERNET OF THINGS PROJECTS</span></div>
-
-      <section class="bento-grid core-iot-grid">
-        <div class="bento-card span-2-col span-2-row project-bento" data-modal-target="modal-proj-alzheimer" data-aos="fade-up">
-          <img src="assets/img/projects/5.1.png" alt="GPS Tracker Alzheimer" />
-          <div class="proj-meta">
-            <span class="proj-badge">MAIN MENU / HARDWARE</span>
-            <h3>Sistem GPS Pelacak Penderita Alzheimer</h3>
-            <p class="truncate-txt">NodeMCU ESP8266, u-blox Neo 6-m, SIM800L, Firebase Realtime Database.</p>
-          </div>
-        </div>
-
-        <div class="bento-card span-2-col project-bento" data-modal-target="modal-proj-bedroom" data-aos="fade-up" data-aos-delay="100">
-          <img src="assets/img/projects/9.1.PNG" alt="Smart Bedroom Prototype" />
-          <div class="proj-meta">
-            <span class="proj-badge">AUTOMATION / BLYNK</span>
-            <h3>Purwarupa Kamar Tidur Pintar Berbasis IoT</h3>
-          </div>
-        </div>
-
-        <div class="bento-card span-2-col project-bento" data-modal-target="modal-proj-tomato" data-aos="fade-up" data-aos-delay="200">
-          <img src="assets/img/projects/8.1.png" alt="Tomato Sorting AI" />
-          <div class="proj-meta">
-            <span class="proj-badge">COMPUTER VISION / ARDUINO</span>
-            <h3>Sistem Sorting Buah Tomat Berbasis Vision</h3>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-label" data-aos="fade-in"><span>[03] ECOSYSTEM UTILITIES & WEB COMPONENT</span></div>
-
-      <section class="bento-grid ecosystem-grid">
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-portfolio">
-          <img src="assets/img/projects/1.1.png" alt="Portfolio Web" />
-          <div class="proj-meta"><h3>Personal Portfolio Ecosystem</h3></div>
-        </div>
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-laundry">
-          <img src="assets/img/projects/2.1.png" alt="Sinar Laundry" />
-          <div class="proj-meta"><h3>SINAR Laundry Administrator</h3></div>
-        </div>
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-converter">
-          <img src="assets/img/projects/3.1.png" alt="Numbers Converter" />
-          <div class="proj-meta"><h3>Real-Time Numbers Converter</h3></div>
-        </div>
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-detection">
-          <img src="assets/img/projects/4.1.png" alt="Object Detection" />
-          <div class="proj-meta"><h3>Multiple Object Detection AI</h3></div>
-        </div>
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-cowmania">
-          <img src="assets/img/projects/6.1.png" alt="CowManiaXX" />
-          <div class="proj-meta"><h3>CowManiaXX React Marketplace</h3></div>
-        </div>
-        <div class="bento-card span-2-col project-bento small-p" data-modal-target="modal-proj-art">
-          <img src="assets/img/projects/7.1.png" alt="Art Gallery" />
-          <div class="proj-meta"><h3>Classic Art Gallery CRUD</h3></div>
-        </div>
-      </section>
-
-      <div class="section-label" data-aos="fade-in"><span>[04] VERIFIED CERTIFICATION REPOSITORIES</span></div>
-
-      <section class="bento-grid core-cert-grid">
-        <div class="bento-card span-2-col interactive-card cert-box-theme" data-modal-target="modal-cert-networks">
-          <i class="bx bx-network-chart cert-icon"></i>
-          <h4>Network Engineering Logs</h4>
-          <p>LSP Komputer (1-8), Command Line, Progate Git Logs (10 Sertifikat)</p>
-        </div>
-        <div class="bento-card span-2-col interactive-card cert-box-theme" data-modal-target="modal-cert-software">
-          <i class="bx bx-code-alt cert-icon"></i>
-          <h4>Software & Development Units</h4>
-          <p>ReVou, Udemy HTML/CSS, React Core, Coding Studio (11 Sertifikat)</p>
-        </div>
-        <div class="bento-card span-2-col interactive-card cert-box-theme" data-modal-target="modal-cert-iot">
-          <i class="bx bx-microchip cert-icon"></i>
-          <h4>Hardware & Microcontroller Units</h4>
-          <p>Microcontroller, Raspberry Pi, Drone Protocols, ESC Competition (4 Sertifikat)</p>
-        </div>
-        <div class="bento-card span-2-col interactive-card cert-box-theme" data-modal-target="modal-cert-research">
-          <i class="bx bx-file cert-icon"></i>
-          <h4>Research & Seminar Protocols</h4>
-          <p>Big Data Analytics, Penulisan Ilmiah, MBKM Study, API Workshop (5 Sertifikat)</p>
-        </div>
-      </section>
-
-      <div class="section-label" data-aos="fade-in"><span>[05] TRANSMIT ENCRYPTED MESSAGE</span></div>
-      <section class="bento-grid">
-        <div class="bento-card span-full contact-bento">
-          <form action="https://formspree.io/f/xoqbqnvk" method="POST" class="cyber-form">
-            <div class="form-inputs">
-              <input type="text" name="Name" placeholder="IDENT_NAME" required />
-              <input type="email" name="Email" placeholder="SECURE_EMAIL" required />
+            <div class="mt-6 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>CLICK TO EXPAND</span>
+              <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
             </div>
-            <textarea name="Message" rows="5" placeholder="ENTER_TRANSMISSION_DATA..." required></textarea>
-            <button type="submit" class="btn-cyber-submit">LAUNCH TELEMETRY <i class="bx bx-send"></i></button>
+          </div>
+
+          <!-- Education History Card Trigger -->
+          <div onclick="openModal('modal-education')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:bg-brand-crimson/10 transition-all flex flex-col justify-between min-h-[180px]">
+            <div>
+              <i class="bx bx-cabinet text-3xl text-brand-gold group-hover:scale-110 transition-transform mb-3 block"></i>
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Education History</h3>
+              <p class="text-xs text-slate-400 mt-1 font-mono">S2 Universitas Pamulang & S1 Universitas Gunadarma</p>
+            </div>
+            <div class="mt-6 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>CLICK TO EXPAND</span>
+              <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Organizational Leadership Card Trigger -->
+          <div onclick="openModal('modal-organization')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:bg-brand-crimson/10 transition-all flex flex-col justify-between min-h-[180px]">
+            <div>
+              <i class="bx bx-group text-3xl text-brand-gold group-hover:scale-110 transition-transform mb-3 block"></i>
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Organizational Leadership</h3>
+              <p class="text-xs text-slate-400 mt-1 font-mono">Himpunan Mahasiswa Sistem Komputer (Wakil Ketua & Akademik)</p>
+            </div>
+            <div class="mt-6 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>CLICK TO EXPAND</span>
+              <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 02: INTERNET OF THINGS PROJECTS ================= -->
+      <section id="iot-projects" class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-md border border-brand-gold/30">[02]</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">PRIMARY KERNEL: INTERNET OF THINGS PROJECTS</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-brand-gold/40 to-transparent"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- IoT Project 1: Alzheimer Tracker -->
+          <div onclick="openModal('modal-proj-alzheimer')" class="bento-glass red-card-glow rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+            <div class="relative h-52 overflow-hidden bg-black/60">
+              <img
+                src="assets/img/projects/5.1.png"
+                alt="GPS Tracker Alzheimer"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/600x400/28050e/d4af37?text=Alzheimer+GPS+Tracker';
+                "
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-brand-crimson px-2.5 py-1 rounded text-[10px] font-mono font-bold text-white uppercase tracking-wider shadow"> HARDWARE / GPS </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Sistem GPS Pelacak Penderita Alzheimer</h3>
+                <p class="text-xs text-slate-300 font-sans line-clamp-2 mt-2">NodeMCU ESP8266, u-blox Neo 6-m, SIM800L, Firebase Realtime Database & Android App Integration.</p>
+              </div>
+              <div class="pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+                <span>DETAILS & DEMO VIDEO</span>
+                <i class="bx bx-play-circle text-xl text-brand-crimson group-hover:scale-125 transition-transform"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- IoT Project 2: Smart Bedroom -->
+          <div onclick="openModal('modal-proj-bedroom')" class="bento-glass red-card-glow rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+            <div class="relative h-52 overflow-hidden bg-black/60">
+              <img
+                src="assets/img/projects/9.1.PNG"
+                alt="Smart Bedroom Prototype"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/600x400/28050e/d4af37?text=IoT+Smart+Bedroom';
+                "
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-brand-gold text-black px-2.5 py-1 rounded text-[10px] font-mono font-bold uppercase tracking-wider shadow"> AUTOMATION / BLYNK </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Purwarupa Kamar Tidur Pintar Berbasis IoT</h3>
+                <p class="text-xs text-slate-300 font-sans line-clamp-2 mt-2">Otomasi RFID solenoid, sensor suhu DHT, kontrol RTC lampu dan integrasi aplikasi Blynk intuitif.</p>
+              </div>
+              <div class="pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+                <span>DETAILS & DEMO VIDEO</span>
+                <i class="bx bx-play-circle text-xl text-brand-crimson group-hover:scale-125 transition-transform"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- IoT Project 3: Tomato Sorting AI -->
+          <div onclick="openModal('modal-proj-tomato')" class="bento-glass red-card-glow rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+            <div class="relative h-52 overflow-hidden bg-black/60">
+              <img
+                src="assets/img/projects/8.1.png"
+                alt="Tomato Sorting AI"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/600x400/28050e/d4af37?text=Vision+Tomato+Sorting';
+                "
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-brand-crimson px-2.5 py-1 rounded text-[10px] font-mono font-bold text-white uppercase tracking-wider shadow"> COMPUTER VISION / ARDUINO </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 class="font-serif font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Sistem Sorting Buah Tomat Berbasis Computer Vision</h3>
+                <p class="text-xs text-slate-300 font-sans line-clamp-2 mt-2">Penyortiran otomatis kematangan buah tomat menggunakan konveyor, webcam vision, Arduino Uno, servo & DC motor.</p>
+              </div>
+              <div class="pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+                <span>DETAILS & DEMO VIDEO</span>
+                <i class="bx bx-play-circle text-xl text-brand-crimson group-hover:scale-125 transition-transform"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 03: ECOSYSTEM UTILITIES & WEB COMPONENT ================= -->
+      <section id="web-apps" class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-md border border-brand-gold/30">[03]</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">ECOSYSTEM UTILITIES & WEB COMPONENT</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-brand-gold/40 to-transparent"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Utility 1 -->
+          <div onclick="openModal('modal-proj-portfolio')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/1.1.png"
+                alt="Portfolio Web"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=Portfolio';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">Personal Portfolio Ecosystem</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">HTML, CSS & JS Architecture</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+
+          <!-- Utility 2 -->
+          <div onclick="openModal('modal-proj-laundry')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/2.1.png"
+                alt="Sinar Laundry"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=Laundry';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">SINAR Laundry Admin Panel</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">Spreadsheet Integrated Web App</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+
+          <!-- Utility 3 -->
+          <div onclick="openModal('modal-proj-converter')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/3.1.png"
+                alt="Numbers Converter"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=Converter';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">Real-Time Numbers Converter</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">Decimal, Binary, Octal, Hex Engine</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+
+          <!-- Utility 4 -->
+          <div onclick="openModal('modal-proj-detection')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/4.1.png"
+                alt="Object Detection"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=AI+Vision';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">Multiple Object Detection AI</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">TensorFlow.js Core Engine</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+
+          <!-- Utility 5 -->
+          <div onclick="openModal('modal-proj-cowmania')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/6.1.png"
+                alt="CowManiaXX"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=CowMania';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">CowManiaXX React Marketplace</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">ReactJS E-Commerce Cart</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+
+          <!-- Utility 6 -->
+          <div onclick="openModal('modal-proj-art')" class="bento-glass gold-border-glow p-5 rounded-2xl cursor-pointer group hover:border-brand-gold transition-all flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-black/60 overflow-hidden shrink-0 border border-brand-gold/30">
+              <img
+                src="assets/img/projects/7.1.png"
+                alt="Art Gallery"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'https://placehold.co/200x200/16050a/d4af37?text=Art+Gallery';
+                "
+              />
+            </div>
+            <div class="flex-1 truncate">
+              <h3 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors truncate">Classic Art Gallery CRUD</h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">ReactJS & Supabase Engine</p>
+            </div>
+            <i class="bx bx-link-external text-xl text-brand-gold"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 04: VERIFIED CERTIFICATIONS ================= -->
+      <section id="certifications" class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-md border border-brand-gold/30">[04]</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">VERIFIED CERTIFICATION REPOSITORIES</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-brand-gold/40 to-transparent"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Cert Box 1 -->
+          <div onclick="openModal('modal-cert-networks')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:scale-[1.02] transition-all flex flex-col justify-between">
+            <div>
+              <i class="bx bx-network-chart text-4xl text-brand-gold group-hover:scale-110 transition-transform mb-4 block"></i>
+              <h4 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors">Network Engineering Logs</h4>
+              <p class="text-xs text-slate-400 mt-2 font-mono">LSP Komputer (1-8), Command Line, Progate Git Logs (10 Sertifikat)</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>VIEW CERTIFICATES</span>
+              <i class="bx bx-chevron-right text-lg"></i>
+            </div>
+          </div>
+
+          <!-- Cert Box 2 -->
+          <div onclick="openModal('modal-cert-software')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:scale-[1.02] transition-all flex flex-col justify-between">
+            <div>
+              <i class="bx bx-code-alt text-4xl text-brand-gold group-hover:scale-110 transition-transform mb-4 block"></i>
+              <h4 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors">Software & Dev Units</h4>
+              <p class="text-xs text-slate-400 mt-2 font-mono">ReVou, Udemy HTML/CSS, React Core, Coding Studio (11 Sertifikat)</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>VIEW CERTIFICATES</span>
+              <i class="bx bx-chevron-right text-lg"></i>
+            </div>
+          </div>
+
+          <!-- Cert Box 3 -->
+          <div onclick="openModal('modal-cert-iot')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:scale-[1.02] transition-all flex flex-col justify-between">
+            <div>
+              <i class="bx bx-microchip text-4xl text-brand-gold group-hover:scale-110 transition-transform mb-4 block"></i>
+              <h4 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors">Hardware & Microcontroller</h4>
+              <p class="text-xs text-slate-400 mt-2 font-mono">Microcontroller, Raspberry Pi, Drone Protocols, ESC Competition (4 Sertifikat)</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>VIEW CERTIFICATES</span>
+              <i class="bx bx-chevron-right text-lg"></i>
+            </div>
+          </div>
+
+          <!-- Cert Box 4 -->
+          <div onclick="openModal('modal-cert-research')" class="bento-glass gold-border-glow p-6 cursor-pointer group hover:scale-[1.02] transition-all flex flex-col justify-between">
+            <div>
+              <i class="bx bx-file text-4xl text-brand-gold group-hover:scale-110 transition-transform mb-4 block"></i>
+              <h4 class="font-serif font-bold text-base text-white group-hover:text-brand-gold transition-colors">Research & Seminars</h4>
+              <p class="text-xs text-slate-400 mt-2 font-mono">Big Data Analytics, Penulisan Ilmiah, MBKM, API Workshop (5 Sertifikat)</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-brand-gold/20 flex items-center justify-between text-xs font-mono text-brand-gold">
+              <span>VIEW CERTIFICATES</span>
+              <i class="bx bx-chevron-right text-lg"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 05: TELEMETRY CONTACT FORM ================= -->
+      <section id="contact" class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-md border border-brand-gold/30">[05]</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">SEND MESSAGE</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-brand-gold/40 to-transparent"></div>
+        </div>
+
+        <div class="bento-glass red-card-glow p-6 sm:p-10 rounded-2xl relative overflow-hidden">
+          <form action="https://formspree.io/f/xoqbqnvk" method="POST" class="space-y-6 max-w-3xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-mono text-brand-gold mb-2 uppercase">NAME</label>
+                <input
+                  type="text"
+                  name="Name"
+                  required
+                  placeholder="John Doe"
+                  class="w-full bg-black/60 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white font-mono focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-mono text-brand-gold mb-2 uppercase">EMAIL</label>
+                <input
+                  type="email"
+                  name="Email"
+                  required
+                  placeholder="john@example.com"
+                  class="w-full bg-black/60 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white font-mono focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-brand-gold mb-2 uppercase">MESSAGE</label>
+              <textarea
+                name="Message"
+                rows="5"
+                required
+                placeholder="Type your message or project inquiry here..."
+                class="w-full bg-black/60 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-white font-mono focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-gold-shine w-full py-4 rounded-xl text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+              <span>SEND</span>
+              <i class="bx bx-send text-lg"></i>
+            </button>
           </form>
         </div>
       </section>
-      <footer class="cyber-footer" data-aos="fade-up">
-        <p>© 2026 WAHYU_ANANDA.SYS // ALL RIGHTS RESERVED. // TERM_STATUS: SECURE_ACCESS_GRANTED</p>
-      </footer>
     </main>
 
-    <div class="cyber-modal-overlay" id="modal-experience">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[LOG_EXP]: WORK_HISTORY</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- FOOTER -->
+    <footer class="border-t border-brand-gold/20 py-8 bg-black/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="font-mono text-xs text-slate-400">© 2026 <span class="text-brand-gold font-bold">WAHYU DWI ANANDA</span> // ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+
+    <!-- ================= MODAL WINDOWS ================= -->
+
+    <!-- Modal Experience -->
+    <div id="modal-experience" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-300">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">Professional Experience</h3>
+          <button onclick="closeModal('modal-experience')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
-          <div class="timeline-log-item">
-            <span class="log-time">July 2026 - Present</span>
-            <h4>Senior High School Informatics and Coding & AI Teacher — Citra Bangsa School</h4>
-            <ul>
+        <div class="p-6 overflow-y-auto space-y-6 text-slate-300 font-sans text-sm">
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">July 2026 - Present</span>
+            <h4 class="font-serif font-bold text-base text-white">Senior High School Informatics and Coding & AI Teacher — Citra Bangsa School</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
               <li>Teach Informatics and Coding & AI, covering programming, computational thinking, and AI fundamentals.</li>
               <li>Develop lesson plans, learning materials, coding projects, and assessments aligned with the curriculum.</li>
               <li>Assess student performance through assignments, projects, and examinations while providing constructive feedback.</li>
               <li>Guide students in the responsible and effective use of AI and digital technologies.</li>
             </ul>
           </div>
-          <div class="timeline-log-item">
-            <span class="log-time">June 2025 - Present</span>
-            <h4>Primary School Informatics Teacher — Citra Bangsa School</h4>
-            <ul>
-              <li><strong>Teach informatics subject:</strong> Deliver engaging and effective lessons on various informatics topics, ensuring students grasp fundamental concepts and practical skills.</li>
-              <li><strong>Develop and implement curriculum:</strong> Design lesson plans, teaching materials, and assessments that align with curriculum standards and cater to diverse learning styles.</li>
-              <li><strong>Assess student learning:</strong> Evaluate student progress through assignments, tests, projects, and observations, providing constructive feedback and grading appropriately.</li>
+
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">June 2025 - Present</span>
+            <h4 class="font-serif font-bold text-base text-white">Primary School Informatics Teacher — Citra Bangsa School</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+              <li><strong>Teach informatics subject:</strong> Deliver engaging and effective lessons on various informatics topics.</li>
+              <li><strong>Develop and implement curriculum:</strong> Design lesson plans, teaching materials, and assessments.</li>
+              <li><strong>Assess student learning:</strong> Evaluate student progress through assignments, tests, projects, and observations.</li>
             </ul>
           </div>
-          <div class="timeline-log-item">
-            <span class="log-time">March 2022 - August 2024</span>
-            <h4>Laboratory Assistant — Electronics and Computer Laboratory, Gunadarma University</h4>
-            <ul>
+
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">March 2022 - August 2024</span>
+            <h4 class="font-serif font-bold text-base text-white">Laboratory Assistant — Electronics and Computer Laboratory, Gunadarma University</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
               <li>Teach basic electronics, digital system, microprocessor, embedded system & interface courses.</li>
-              <li>Planning and preparing lessons.</li>
-              <li>Marking student work and recording performance.</li>
-              <li>Setting assessments and overseeing examinations.</li>
+              <li>Planning and preparing lessons, marking student work, setting assessments, overseeing exams.</li>
               <li>Student project Consultant.</li>
             </ul>
           </div>
@@ -240,298 +881,609 @@
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-education">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[LOG_ED]: ACADEMIC_TRACK</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- Modal Education -->
+    <div id="modal-education" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">Education History</h3>
+          <button onclick="closeModal('modal-education')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
-          <div class="timeline-log-item">
-            <span class="log-time">2026 - Present</span>
-            <h4>Master's Degree, Informatics Engineering — Pamulang University</h4>
-            <ul>
+        <div class="p-6 overflow-y-auto space-y-6 text-slate-300 font-sans text-sm">
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">2026 - Present</span>
+            <h4 class="font-serif font-bold text-base text-white">Master's Degree, Informatics Engineering — Pamulang University</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
               <li>Specialization in Internet of Things (IoT).</li>
-              <li>Applying algorithm analysis techniques to evaluate computational efficiency and optimize problem-solving approaches.</li>
+              <li>Applying algorithm analysis techniques to evaluate computational efficiency and optimize problem-solving.</li>
               <li>Building data-driven insights through data mining techniques for analysis and decision support.</li>
-              <li>Designing and managing computer network systems to support reliable communication and connectivity.</li>
-              <li>Developing mathematical models and optimization approaches to improve system performance and resource allocation.</li>
+              <li>Designing and managing computer network systems to support reliable communication.</li>
             </ul>
           </div>
-          <div class="timeline-log-item">
-            <span class="log-time">2020 - 2024</span>
-            <h4>Bachelor's Degree, Computer Systems — Gunadarma University</h4>
-            <ul>
-              <li>Learning about Hardware and Device, Embedded System, Networking, Mobile Computing, and Internet of Things.</li>
+
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">2020 - 2024</span>
+            <h4 class="font-serif font-bold text-base text-white">Bachelor's Degree, Computer Systems — Gunadarma University</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+              <li>Hardware and Device, Embedded System, Networking, Mobile Computing, and IoT.</li>
               <li>Active in committee activities and campus organizations.</li>
             </ul>
           </div>
-          <div class="timeline-log-item">
-            <span class="log-time">2014 - 2017</span>
-            <h4>High School, Science — SMAN CMBBS</h4>
-            <ul>
-              <li>Government scholarship school.</li>
-              <li>Actively participate in competitions.</li>
-              <li>Active in organizations and committees.</li>
+
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">2014 - 2017</span>
+            <h4 class="font-serif font-bold text-base text-white">High School, Science — SMAN CMBBS</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+              <li>Government scholarship school. Actively participate in competitions and student organizations.</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-organization">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[LOG_ORG]: LEADERSHIP_UNITS</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- Modal Organization -->
+    <div id="modal-organization" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">Organizational Leadership</h3>
+          <button onclick="closeModal('modal-organization')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
-          <div class="timeline-log-item">
-            <span class="log-time">Dec 2022 - Aug 2024</span>
-            <h4>Vice President — Computer Systems Student Association, Gunadarma University</h4>
-            <ul>
-              <li>Responsible to lead the organization along with President.</li>
-              <li>Presides over meetings in the absence of the President.</li>
-              <li>Supervises all student event planning, fundraising, or other activities.</li>
-              <li>Directs Constitutional updating and revisions.</li>
-              <li>Assists all executive officers.</li>
-              <li>Provides follow-up for organizational tasks.</li>
+        <div class="p-6 overflow-y-auto space-y-6 text-slate-300 font-sans text-sm">
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">Dec 2022 - Aug 2024</span>
+            <h4 class="font-serif font-bold text-base text-white">Vice President — Computer Systems Student Association, Gunadarma University</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+              <li>Lead the organization along with President and supervise student event planning and fundraising.</li>
+              <li>Direct Constitutional updating and revisions and assist all executive officers.</li>
             </ul>
           </div>
-          <div class="timeline-log-item">
-            <span class="log-time">Dec 2021 - Dec 2022</span>
-            <h4>Academic Division Member — Computer Systems Student Association, Gunadarma University</h4>
-            <ul>
-              <li>Briefing new students about lectures.</li>
-              <li>Make video tutorials about college projects.</li>
-              <li>Student project Tutor.</li>
+
+          <div class="border-l-2 border-brand-gold pl-4 space-y-2">
+            <span class="font-mono text-xs text-brand-gold">Dec 2021 - Dec 2022</span>
+            <h4 class="font-serif font-bold text-base text-white">Academic Division Member — Computer Systems Student Association, Gunadarma University</h4>
+            <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+              <li>Briefing new students, creating tutorial videos, and tutoring student projects.</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-proj-alzheimer">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: ALZHEIMER GPS TRACKER</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- Project Video Modals -->
+    <!-- Alzheimer Modal -->
+    <div id="modal-proj-alzheimer" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-2xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: ALZHEIMER GPS TRACKER</h3>
+          <button onclick="closeModal('modal-proj-alzheimer')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
+        <div class="p-6 overflow-y-auto space-y-4 text-slate-300 text-sm">
           <p>
-            <strong>Deskripsi Sistem:</strong> Alat GPS dibangun dengan NodeMCU ESP8266, modul GPS u-blox Neo 6-m, dan modul GSM/GPRS SIM800L, ditenagai dengan baterai 18650 berkapasitas 3000mAh serta modul pengisi daya agar mudah
-            digunakan. Alat GPS terintegrasi aplikasi android yang dibuat dengan MIT App Inventor dan bantuan firebase realtime database sebagai basis data membuat pemantauan lokasi mudah hanya dengan sebuah smartphone dan jaringan
-            internet.
+            <strong>Deskripsi Sistem:</strong> Alat GPS dibangun dengan NodeMCU ESP8266, modul GPS u-blox Neo 6-m, dan modul GSM/GPRS SIM800L, ditenagai dengan baterai 18650 berkapasitas 3000mAh. Terintegrasi aplikasi Android MIT App
+            Inventor & Firebase Realtime Database untuk pemantauan realtime.
           </p>
-          <div class="modal-action-zone">
-            <a href="assets/img/projects/5.mp4" class="portfolio-lightbox btn-cyber-link"><i class="bx bx-play-circle"></i> RUN TARGET VIDEO DEMO</a>
+          <div class="pt-4 border-t border-brand-gold/20">
+            <a href="assets/img/projects/5.mp4" target="_blank" class="btn-gold-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs uppercase font-bold"> <i class="bx bx-play-circle text-lg"></i> RUN TARGET VIDEO DEMO </a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-proj-bedroom">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: IOT SMART BEDROOM</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- Bedroom Modal -->
+    <div id="modal-proj-bedroom" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-2xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: IOT SMART BEDROOM</h3>
+          <button onclick="closeModal('modal-proj-bedroom')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
-          <p>
-            <strong>Deskripsi Sistem:</strong> Prototype kamar tidur pintar berbasis IoT dengan menggunakan mikrokontroler NodeMCU ESP8266 dan aplikasi Blynk. Dengan fokus pada otomasi pintu berbasis RFID, kontrol suhu menggunakan sensor
-            DHT, dan pengaturan otomatis lampu melalui RTC, sistem ini diharapkan dapat memberikan solusi terpadu untuk permasalahan umum dalam kamar tidur. Pengembangan aplikasi mobile menggunakan Blynk sebagai antarmuka pengguna
-            memberikan penghuni kemampuan kontrol intuitif terhadap solenoid pintu, kipas, dan lampu dari jarak jauh.
-          </p>
-          <div class="modal-action-zone">
-            <a href="assets/img/projects/9.mp4" class="portfolio-lightbox btn-cyber-link"><i class="bx bx-play-circle"></i> RUN TARGET VIDEO DEMO</a>
+        <div class="p-6 overflow-y-auto space-y-4 text-slate-300 text-sm">
+          <p><strong>Deskripsi Sistem:</strong> Prototype kamar tidur pintar berbasis IoT menggunakan Mikrokontroler NodeMCU ESP8266 & aplikasi Blynk. Dilengkapi RFID solenoid pintu, sensor suhu DHT, dan RTC otomatisasi lampu.</p>
+          <div class="pt-4 border-t border-brand-gold/20">
+            <a href="assets/img/projects/9.mp4" target="_blank" class="btn-gold-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs uppercase font-bold"> <i class="bx bx-play-circle text-lg"></i> RUN TARGET VIDEO DEMO </a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-proj-tomato">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: COMPUTER VISION FRUIT SORTING</h3>
-          <i class="bx bx-x close-modal-btn"></i>
+    <!-- Tomato Modal -->
+    <div id="modal-proj-tomato" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-2xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: COMPUTER VISION FRUIT SORTING</h3>
+          <button onclick="closeModal('modal-proj-tomato')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
         </div>
-        <div class="modal-scroll-body">
-          <p>
-            <strong>Deskripsi Sistem:</strong> Sistem ini menggunakan konveyor sederhana yang terbuat dari bahan kayu, pipa pvc, dan kain spunbond, serta dilengkapi dengan Arduino Uno, dua motor servo, dan motor DC untuk mengotomatisasi
-            penyortiran buah tomat berdasarkan tingkat kematangan. Integrasi webcam dengan teknologi computer vision diterapkan untuk mendeteksi kematangan tomat, yang kemudian dihubungkan ke Arduino untuk pengolahan data dan pengambilan
-            keputusan.
-          </p>
-          <div class="modal-action-zone">
-            <a href="assets/img/projects/8.mp4" class="portfolio-lightbox btn-cyber-link"><i class="bx bx-play-circle"></i> RUN TARGET VIDEO DEMO</a>
+        <div class="p-6 overflow-y-auto space-y-4 text-slate-300 text-sm">
+          <p><strong>Deskripsi Sistem:</strong> Sistem konveyor otomatis dengan Arduino Uno, servo motor, dan webcam computer vision untuk mendeteksi tingkat kematangan tomat secara akurat secara realtime.</p>
+          <div class="pt-4 border-t border-brand-gold/20">
+            <a href="assets/img/projects/8.mp4" target="_blank" class="btn-gold-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs uppercase font-bold"> <i class="bx bx-play-circle text-lg"></i> RUN TARGET VIDEO DEMO </a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-proj-portfolio">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: PORTFOLIO INTERFACE</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>My personal portfolio made with HTML, CSS & JS Architecture.</p>
-          <div class="modal-action-zone">
-            <a href="https://wahyudwiananda.github.io/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cyber-modal-overlay" id="modal-proj-laundry">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: LAUNDRY ADMIN PANEL</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>SINAR Laundry Administrator web for income and expenditure input form which will be recorded on the spreadsheet.</p>
-          <div class="modal-action-zone">
-            <a href="https://wahyudwiananda.github.io/sinarlaundry/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cyber-modal-overlay" id="modal-proj-converter">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: SYSTEM NUMBERS CONVERTER</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>Decimal, Binary, Octal, Hexadecimal Real-Time Engine Converter.</p>
-          <div class="modal-action-zone">
-            <a href="https://wahyudwiananda.github.io/convertnumbers/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cyber-modal-overlay" id="modal-proj-detection">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: MULTIPLE OBJECT DETECTION AI</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>Real-time Multiple Detection Object using pre-trained model in TensorFlow.js Core.</p>
-          <div class="modal-action-zone">
-            <a href="https://wahyudwiananda.github.io/objectdetection/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cyber-modal-overlay" id="modal-proj-cowmania">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: COWMANIAXX REACT APP</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>Creating an example of web-based marketplace application with a shopping cart feature built using ReactJS Engine.</p>
-          <div class="modal-action-zone">
-            <a href="https://cowmaniaxx-react.vercel.app/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cyber-modal-overlay" id="modal-proj-art">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>PROJECT: CLASSIC ART CRUD REPO</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body">
-          <p>Classic art multimedia gallery CRUD system made with ReactJS and Supabase Engine Control.</p>
-          <div class="modal-action-zone">
-            <a href="https://artgallery-jade.vercel.app/" target="_blank" class="btn-cyber-link"><i class="bx bx-link-external"></i> OPEN LINK</a>
-          </div>
+    <!-- Web Utilities Direct Link Modals -->
+    <!-- Portfolio -->
+    <div id="modal-proj-portfolio" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: PORTFOLIO INTERFACE</h3>
+        <p class="text-sm text-slate-300">My personal portfolio built with modern HTML, CSS, and JS Architecture.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-portfolio')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://wahyudwiananda.github.io/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-cert-networks">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[CERT]: NETWORKS REPOSITORY</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body cert-modal-layout">
-          <a href="assets/img/Certificate/sertif command line.jpg" class="portfolio-lightbox cert-item-click"><span>Kursus Command Line (Progate)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/sertif git.jpg" class="portfolio-lightbox cert-item-click"><span>Kursus Git (Progate)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp1_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Computer Networks Requirement Identification (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp2_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Computer Networks Connectivity (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp3_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Addressing and Routing in Computer Networks (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp4_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Computer Networks Security (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp5_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Computer Networks Performance Optimization (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp6_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Network Design and Configuration (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp7_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Computer Networks Failure Tracking and Recovery (LSP)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/lsp8_page-0001.jpg" class="portfolio-lightbox cert-item-click"><span>Network Security and Optimization (LSP)</span><i class="bx bx-show"></i></a>
+    <!-- Sinar Laundry -->
+    <div id="modal-proj-laundry" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: LAUNDRY ADMIN PANEL</h3>
+        <p class="text-sm text-slate-300">SINAR Laundry Administrator web for income and expenditure tracking recorded to Google Spreadsheet.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-laundry')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://wahyudwiananda.github.io/sinarlaundry/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-cert-software">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[CERT]: DEVELOPMENT REPOSITORY</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body cert-modal-layout">
-          <a href="assets/img/Certificate/wahyu-ananda-revou1.jpg" class="portfolio-lightbox cert-item-click"><span>Intro to Software Engineering (Revou)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/udemy_html and css.jpg" class="portfolio-lightbox cert-item-click"><span>Build Responsive Real-World Websites (Udemy)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/python_sololearn.png" class="portfolio-lightbox cert-item-click"><span>Python Data Structure (Sololearn)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/Certificate_Fundamental-Algoritma_Wahyu-Dwi-Ananda.jpg" class="portfolio-lightbox cert-item-click"><span>Fundamental Algoritma (Coding Studio)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/CSS_Animation.jpg" class="portfolio-lightbox cert-item-click"><span>CSS Animation (MySkill)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/react1.jpg" class="portfolio-lightbox cert-item-click"><span>Introduction to React (MySkill)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/react2.jpg" class="portfolio-lightbox cert-item-click"><span>Basic Concept React (MySkill)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/react3.jpg" class="portfolio-lightbox cert-item-click"><span>React List and Styling (MySkill)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/Sertifikat Wahyu Dwi Ananda_edspert.jpg" class="portfolio-lightbox cert-item-click"><span>Webminar Programming ReactJS (Edspert.id)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/CD_JS.jpg" class="portfolio-lightbox cert-item-click"><span>Learn JavaScript Basics (codedamn)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/html.jpg" class="portfolio-lightbox cert-item-click"><span>Building Website using HTML 5 (Univ Gunadarma)</span><i class="bx bx-show"></i></a>
+    <!-- Converter -->
+    <div id="modal-proj-converter" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: NUMBERS CONVERTER</h3>
+        <p class="text-sm text-slate-300">Decimal, Binary, Octal, Hexadecimal Real-Time Engine Converter.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-converter')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://wahyudwiananda.github.io/convertnumbers/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-cert-iot">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[CERT]: HARDWARE UNITS</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body cert-modal-layout">
-          <a href="assets/img/Certificate/micon.jpg" class="portfolio-lightbox cert-item-click"><span>MICROCONTROLLER (Universitas Gunadarma)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/raspi.jpg" class="portfolio-lightbox cert-item-click"><span>RASPBERRY PI BASIC (Universitas Gunadarma)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/drone.jpg" class="portfolio-lightbox cert-item-click"><span>DRONE PROTOCOLS (Universitas Gunadarma)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/esc2022.jpg" class="portfolio-lightbox cert-item-click"><span>Embedded System Competition 2022 (Pusat Studi Robotika)</span><i class="bx bx-show"></i></a>
+    <!-- Detection -->
+    <div id="modal-proj-detection" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: OBJECT DETECTION AI</h3>
+        <p class="text-sm text-slate-300">Real-time Multiple Object Detection using pre-trained model in TensorFlow.js Core.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-detection')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://wahyudwiananda.github.io/objectdetection/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
         </div>
       </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-cert-research">
-      <div class="cyber-modal-window">
-        <div class="modal-header-sys">
-          <h3>[CERT]: RESEARCH PROTOCOLS</h3>
-          <i class="bx bx-x close-modal-btn"></i>
-        </div>
-        <div class="modal-scroll-body cert-modal-layout">
-          <a href="assets/img/Certificate/lokakarya.jpg" class="portfolio-lightbox cert-item-click"><span>Lokakarya Pemanfaatan Big Data Analytics (Univ Gunadarma)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/PI.jpg" class="portfolio-lightbox cert-item-click"><span>Workshop Penulisan Ilmiah (Universitas Gunadarma)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/webminar fikti.jpg" class="portfolio-lightbox cert-item-click"><span>Webminar Hasil Penelitian MBKM (BEM FIKTI UG)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/API_Wahyu Dwi Ananda.jpg" class="portfolio-lightbox cert-item-click"><span>Workshop Developing Application with APIs (BEM FIKTI)</span><i class="bx bx-show"></i></a>
-          <a href="assets/img/Certificate/GPT_Sertifikat Wahyu Dwi Ananda.jpg" class="portfolio-lightbox cert-item-click"><span>Webminar ChatGPT Prompt Engineering (Data Science Center)</span><i class="bx bx-show"></i></a>
+    <!-- CowMania -->
+    <div id="modal-proj-cowmania" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: COWMANIAXX REACT APP</h3>
+        <p class="text-sm text-slate-300">Web-based marketplace application with a shopping cart feature built using ReactJS Engine.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-cowmania')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://cowmaniaxx-react.vercel.app/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
         </div>
       </div>
     </div>
 
-    <div id="preloader"><div class="loader-pulse"></div></div>
+    <!-- Art Gallery -->
+    <div id="modal-proj-art" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-lg p-6 rounded-2xl space-y-4">
+        <h3 class="font-serif font-bold text-lg text-brand-gold">PROJECT: CLASSIC ART CRUD</h3>
+        <p class="text-sm text-slate-300">Classic art multimedia gallery CRUD system made with ReactJS and Supabase Engine.</p>
+        <div class="pt-3 border-t border-brand-gold/20 flex justify-end gap-3">
+          <button onclick="closeModal('modal-proj-art')" class="px-4 py-2 text-xs font-mono text-slate-400">CLOSE</button>
+          <a href="https://artgallery-jade.vercel.app/" target="_blank" class="btn-gold-shine px-5 py-2 rounded-xl text-xs font-bold uppercase">OPEN LINK</a>
+        </div>
+      </div>
+    </div>
 
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Certification Modal Repositories -->
+    <!-- Cert Networks Modal -->
+    <div id="modal-cert-networks" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">[CERT]: NETWORKS REPOSITORY</h3>
+          <button onclick="closeModal('modal-cert-networks')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-3 font-mono text-xs">
+          <a
+            href="assets/img/Certificate/sertif command line.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Kursus Command Line (Progate)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/sertif git.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Kursus Git (Progate)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp1_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Computer Networks Requirement Identification (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp2_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Computer Networks Connectivity (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp3_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Addressing and Routing in Computer Networks (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp4_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Computer Networks Security (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp5_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Computer Networks Performance Optimization (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp6_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Network Design and Configuration (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp7_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Computer Networks Failure Tracking and Recovery (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/lsp8_page-0001.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Network Security and Optimization (LSP)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert Software Modal -->
+    <div id="modal-cert-software" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">[CERT]: DEVELOPMENT REPOSITORY</h3>
+          <button onclick="closeModal('modal-cert-software')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-3 font-mono text-xs">
+          <a
+            href="assets/img/Certificate/wahyu-ananda-revou1.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Intro to Software Engineering (ReVou)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/udemy_html and css.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Build Responsive Real-World Websites (Udemy)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/python_sololearn.png"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Python Data Structure (Sololearn)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/Certificate_Fundamental-Algoritma_Wahyu-Dwi-Ananda.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Fundamental Algoritma (Coding Studio)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/CSS_Animation.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>CSS Animation (MySkill)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/react1.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Introduction to React (MySkill)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/react2.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Basic Concept React (MySkill)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/react3.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>React List and Styling (MySkill)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/Sertifikat Wahyu Dwi Ananda_edspert.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Webinar Programming ReactJS (Edspert.id)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/CD_JS.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Learn JavaScript Basics (codedamn)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/html.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Building Website using HTML 5 (Univ Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert Hardware Modal -->
+    <div id="modal-cert-iot" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">[CERT]: HARDWARE UNITS</h3>
+          <button onclick="closeModal('modal-cert-iot')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-3 font-mono text-xs">
+          <a
+            href="assets/img/Certificate/micon.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>MICROCONTROLLER (Universitas Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/raspi.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>RASPBERRY PI BASIC (Universitas Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/drone.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>DRONE PROTOCOLS (Universitas Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/esc2022.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Embedded System Competition 2022 (Pusat Studi Robotika)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert Research Modal -->
+    <div id="modal-cert-research" class="fixed inset-0 z-50 modal-blur-bg hidden flex items-center justify-center p-4">
+      <div class="bento-glass gold-border-glow w-full max-w-3xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between bg-black/50">
+          <h3 class="font-serif font-bold text-lg text-brand-gold">[CERT]: RESEARCH PROTOCOLS</h3>
+          <button onclick="closeModal('modal-cert-research')" class="text-slate-400 hover:text-white text-2xl"><i class="bx bx-x"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-3 font-mono text-xs">
+          <a
+            href="assets/img/Certificate/lokakarya.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Lokakarya Pemanfaatan Big Data Analytics (Univ Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/PI.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Workshop Penulisan Ilmiah (Universitas Gunadarma)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/webminar fikti.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Webinar Hasil Penelitian MBKM (BEM FIKTI UG)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/API_Wahyu Dwi Ananda.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Workshop Developing Application with APIs (BEM FIKTI)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+          <a
+            href="assets/img/Certificate/GPT_Sertifikat Wahyu Dwi Ananda.jpg"
+            target="_blank"
+            class="p-3 rounded-xl bg-black/40 border border-brand-gold/20 hover:border-brand-gold flex items-center justify-between text-slate-200 hover:text-brand-gold transition-colors"
+          >
+            <span>Webinar ChatGPT Prompt Engineering (Data Science Center)</span> <i class="bx bx-show text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <script>
+      const canvas = document.getElementById('bgCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initParticles();
+      });
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+          this.radius = Math.random() * 2 + 1;
+          this.color = Math.random() > 0.4 ? '#d4af37' : '#dc2626';
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = this.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      let particles = [];
+      function initParticles() {
+        particles = [];
+        const count = Math.min(Math.floor(width / 18), 70);
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw connecting web lines
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(212, 175, 55, ${0.18 - (dist / 130) * 0.18})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+
+        requestAnimationFrame(animateCanvas);
+      }
+
+      initParticles();
+      animateCanvas();
+
+      // Typed Output Animation
+      const typedItems = ['Informatics Teacher.', 'Embedded System Engineer.', 'IoT Specialist.'];
+      let itemIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typedElement = document.getElementById('typed-output');
+
+      function typeEffect() {
+        const currentItem = typedItems[itemIndex];
+
+        if (isDeleting) {
+          typedElement.textContent = currentItem.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typedElement.textContent = currentItem.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 30 : 70;
+
+        if (!isDeleting && charIndex === currentItem.length) {
+          typeSpeed = 2000; // Pause at end of word
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          itemIndex = (itemIndex + 1) % typedItems.length;
+          typeSpeed = 400;
+        }
+
+        setTimeout(typeEffect, typeSpeed);
+      }
+
+      document.addEventListener('DOMContentLoaded', typeEffect);
+
+      // Global Modal Controls
+      function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      }
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('[id^="modal-"]').forEach((m) => m.classList.add('hidden'));
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      // Close on backdrop click
+      document.querySelectorAll('[id^="modal-"]').forEach((modal) => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+          }
+        });
+      });
+    </script>
   </body>
 </html>
